@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package cloud;
+
+
+import "google/protobuf/timestamp.proto";
+
+service UserService {
+  rpc Login (LoginRequest) returns (LoginResponse);
+}
+
+service EnrollmentService {
+  rpc Enroll (EnrollRequest) returns (EnrollResponse);
+  rpc GetEnrollmentStatus (EnrollmentStatusRequest) returns (EnrollmentStatusResponse);
+}
+
+message LoginRequest {
+  string login = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  string result = 1;
+  string token = 2;
+  string user_id = 3;
+  google.protobuf.Timestamp expires_at = 4;
+}
+
+message EnrollRequest {
+  string login = 1;
+  string password = 2;
+  string email = 3;
+  string full_name = 4;
+  string otp_code = 5;
+  int64 storage_limit_mb = 6;
+}
+
+message EnrollResponse {
+  string result = 1;
+  string enrollment_id = 2;
+  string user_id = 3;
+  int64 allocated_storage_mb = 4;
+}
+
+message EnrollmentStatusRequest {
+  string enrollment_id = 1;
+}
+
+enum EnrollmentStatus {
+  ENROLLMENT_STATUS_UNSPECIFIED = 0;
+  PENDING = 1;
+  COMPLETED = 2;
+  FAILED = 3;
+  OTP_REQUIRED = 4;
+}
+
+message EnrollmentStatusResponse {
+  EnrollmentStatus status = 1;
+  string details = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string otp_destination = 4;
+}
