@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package cloudsim;
+
+service StorageService {
+  rpc PutObject (PutObjectRequest) returns (PutObjectResponse);
+  rpc GetObject (GetObjectRequest) returns (GetObjectResponse);
+  rpc ListObjects (ListObjectsRequest) returns (ListObjectsResponse);
+  rpc GetQuota (GetQuotaRequest) returns (GetQuotaResponse);
+  rpc DeleteObject (DeleteObjectRequest) returns (DeleteObjectResponse);
+}
+
+message PutObjectRequest {
+  string user_id = 1;
+  string path = 2;  // logical path
+  bytes data = 3;   // content
+}
+
+message PutObjectResponse {
+  string result = 1; // OK or error message
+  int64 size_mb = 2;
+}
+
+message GetObjectRequest {
+  string user_id = 1;
+  string path = 2;
+}
+
+message GetObjectResponse {
+  string result = 1;
+  bytes data = 2;
+  int64 size_mb = 3;
+}
+
+message ListObjectsRequest {
+  string user_id = 1;
+  string prefix = 2;
+}
+
+message ObjectInfo {
+  string path = 1;
+  int64 size_mb = 2;
+}
+
+message ListObjectsResponse {
+  repeated ObjectInfo objects = 1;
+}
+
+message GetQuotaRequest {
+  string user_id = 1;
+}
+
+message GetQuotaResponse {
+  int64 limit_mb = 1;
+  int64 used_mb = 2;
+}
+
+message DeleteObjectRequest {
+  string user_id = 1;
+  string path = 2;
+}
+
+message DeleteObjectResponse {
+  string result = 1;
+}
