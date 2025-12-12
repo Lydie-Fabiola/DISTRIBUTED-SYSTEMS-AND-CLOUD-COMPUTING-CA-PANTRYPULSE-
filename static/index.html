@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CloudSim Drive</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>CloudSim Drive</h1>
+      <div class="user">User ID: <input id="userId" value="johndoe" /></div>
+    </header>
+
+    <section class="stats">
+      <div class="card">
+        <h3>Your Quota</h3>
+        <div id="quota"></div>
+      </div>
+      <div class="card">
+        <h3>System Memory</h3>
+        <div id="system"></div>
+      </div>
+    </section>
+
+    <section class="upload">
+      <h2>Upload File</h2>
+      <form id="uploadForm">
+        <input type="file" id="fileInput" name="file" />
+        <input type="text" id="pathInput" name="path" placeholder="Target path (optional)" />
+        <label><input type="checkbox" id="dupInput" /> Allow duplicate</label>
+        <button type="submit">Upload</button>
+      </form>
+      <div class="progress">
+        <div id="progressBar" class="bar"></div>
+      </div>
+      <div id="uploadResult" class="result"></div>
+    </section>
+
+    <section class="files">
+      <h2>Your Files</h2>
+      <div id="filesList"></div>
+    </section>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+import sys
+</html>
